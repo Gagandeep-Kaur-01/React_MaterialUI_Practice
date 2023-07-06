@@ -12,17 +12,22 @@ import { AppBar,
          Box 
         } from '@material-ui/core';
 
+import Icon from '../../Images/icon.jpg'
+
 import HomeIcon from '@material-ui/icons/Home';
-import { People as PeopleIcon } from '@material-ui/icons';
 import WorkIcon from '@material-ui/icons/Work';
 import MailIcon from '@material-ui/icons/Mail';
 import DehazeIcon from "@material-ui/icons/Dehaze";
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { makeStyles } from '@material-ui/core/styles';
 
-import UsersPage from '../UserPage/UserPage';
 import CheckboxSelection from '../CheckboxSelection';
 import Searchbar from '../Searchbar';
 import About from '../About';
+import TabSelection from '../TabSelection';
+import ExcelExport from '../ExcelExport';
+
+import items from '../../Utilities/constant';
 
 const drawerWidth = 240;
 
@@ -80,25 +85,26 @@ function Dashboard() {
           }}
         >
         <Toolbar />
-          <List>
-            <ListItem button component={Link} to="/">
+        <img src={Icon} alt="Website Icon" style={{ width: '40px', height: '40px', margin: '20px' }} />
+          <List>  
+            <ListItem button component={Link} to="/tabs">
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
-              <ListItemText primary="Home" />
-            </ListItem>
+              <ListItemText primary="Tab Selection" />
+            </ListItem>                       
             <ListItem button component={Link} to="/about">
               <ListItemIcon>
                 <WorkIcon />
               </ListItemIcon>
               <ListItemText primary="About" />
             </ListItem>
-            <ListItem button component={Link} to="/users">
+            {/* <ListItem button component={Link} to="/users">
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
               <ListItemText primary="Users" />
-            </ListItem>
+            </ListItem> */}
             <ListItem button component={Link} to="/searchbar">
               <ListItemIcon>
                 <WorkIcon />
@@ -109,8 +115,15 @@ function Dashboard() {
               <ListItemIcon>
                 <MailIcon />
               </ListItemIcon>
-              <ListItemText primary="CheckboxSelection" />
-              </ListItem>
+              <ListItemText primary="Checkbox Selection" />
+            </ListItem>
+            <ListItem button component={Link} to="/export">
+            <ListItemIcon>
+              <FileDownloadIcon />
+            </ListItemIcon>
+            <ListItemText primary="Excel Export" />
+          </ListItem>   
+
           </List>
         </Drawer> 
         {/* <AppBar style={{ background: '#2E3B55 '}}>
@@ -128,7 +141,10 @@ function Dashboard() {
         </AppBar>     */}
         <main className={classes.content}>
           <Routes>
-            <Route exact path="/users" element={<UsersPage />} />
+            {/* <Route exact path="/" element= {<Home />} /> */}
+            <Route exact path="/tabs" element = {<TabSelection />} />
+            {/* <Route exact path="/users" element = {<UsersPage />} />  */}
+            <Route exact path="/export" element = {<ExcelExport tableData={items}/>} />
             <Route path="/about" element={<About />} />
             <Route path="/searchbar" element={<Searchbar />} /> 
             <Route path="/checkboxselection" element = {<CheckboxSelection />} />
